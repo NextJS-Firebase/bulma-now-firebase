@@ -29,7 +29,11 @@ const GridContainer = styled.div`
 `;
 
 const ChatContainer = styled.div`
+  height: calc(100vh - 52px);
+  border: 1px solid red;
+  overflow: hidden;
   display: grid;
+  grid-area: main;
   grid-template-columns: 275px 1fr;
   grid-template-rows: 71px 1fr 78px;
   grid-template-areas:
@@ -38,33 +42,20 @@ const ChatContainer = styled.div`
     "conversation-list chat-form";
   @media only screen and (max-width: 700px) {
     grid-template-columns: 1fr;
-    grid-template-rows: 71px 1fr 78px;
+    grid-template-rows: 71px 1fr;
     grid-template-areas:
-      "chat-title"
-      "chat-message-list"
-      "chat-form";
+      "search-container"
+      "conversation-list";
   }
-  width: 100%;
-  height: 100%;
   background: #fff;
-  overflow-y: scroll;
 `;
-const ChatBody = styled.div`
-  height: calc(100vh - 52px);
-  overflow: hidden;
-  display: grid;
-  grid-area: main;
-  place-items: center center;
-`;
+
 const SearchContainer = styled.div`
   display: grid;
   align-items: center;
   grid-area: search-container;
   z-index: 1;
   padding: 0 20px;
-  @media only screen and (max-width: 700px) {
-    display: none;
-  }
   input {
     width: 167px;
     color: #eee;
@@ -86,9 +77,6 @@ const ConversationList = styled.div`
   border-right: 0.2px solid #dcdde1;
   color: #353b48;
   overflow-y: scroll;
-  @media only screen and (max-width: 700px) {
-    display: none;
-  }
 `;
 const NewMessageContainer = styled.div`
   grid-area: new-message-container;
@@ -117,6 +105,9 @@ const ChatTitle = styled.div`
   font-size: 1.3rem;
   border-radius: 0 10px 0 0;
   padding: 0 20px;
+  @media only screen and (max-width: 700px) {
+    display: none;
+  }
 `;
 const ChatMessageList = styled.div`
   grid-area: chat-message-list;
@@ -124,6 +115,9 @@ const ChatMessageList = styled.div`
   flex-direction: column-reverse;
   padding: 0 20px;
   overflow-y: scroll;
+  @media only screen and (max-width: 700px) {
+    display: none;
+  }
 `;
 const ChatForm = styled.div`
   grid-area: chat-form;
@@ -146,6 +140,9 @@ const ChatForm = styled.div`
     color: #330;
     border-radius: 6px;
     font-size: 1.4rem;
+  }
+  @media only screen and (max-width: 700px) {
+    display: none;
   }
 `;
 const ConversationSnippet = styled.div`
@@ -517,38 +514,32 @@ const Inbox = () => {
       <GlobalStyle overflow={false} />
       <MobileSidebar open={showMobileMenu} handleMenuClick={handleMenuClick} />
       <Sidebar collapseMenu={collapseMenu} collapse={collapse} />
-      <ChatBody>
-        <ChatContainer>
-          <Head>
-            <title>Chat App</title>
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-          <SearchContainer>
-            <input type="text" placeholder="search" />
-          </SearchContainer>
-          <ConversationList>
-            {conversations.map((conversation) => (
-              <Conversation
-                id={conversation.id}
-                conversation={conversation}
-                handleClick={handleClick}
-              />
-            ))}
-          </ConversationList>
-          <ChatTitle>
-            <span>{lead.name}</span> <img src="../static/trash-logo.svg"></img>
-          </ChatTitle>
-          <ChatMessageList>
-            {messages !== [] &&
-              messages.map((message) => <Message message={message} />)}
-            {messages.length == 0 && <p>No messages. How about sending one?</p>}
-          </ChatMessageList>
-          <ChatForm>
-            <img src="../static/attachment-logo.svg"></img>
-            <input type="text" placeholder="type a message" />
-          </ChatForm>
-        </ChatContainer>
-      </ChatBody>
+      <ChatContainer list={true}>
+        <SearchContainer>
+          <input type="text" placeholder="search" />
+        </SearchContainer>
+        <ConversationList>
+          {conversations.map((conversation) => (
+            <Conversation
+              id={conversation.id}
+              conversation={conversation}
+              handleClick={handleClick}
+            />
+          ))}
+        </ConversationList>
+        <ChatTitle>
+          <span>{lead.name}</span> <img src="../static/trash-logo.svg"></img>
+        </ChatTitle>
+        <ChatMessageList>
+          {messages !== [] &&
+            messages.map((message) => <Message message={message} />)}
+          {messages.length == 0 && <p>No messages. How about sending one?</p>}
+        </ChatMessageList>
+        <ChatForm>
+          <img src="../static/attachment-logo.svg"></img>
+          <input type="text" placeholder="type a message" />
+        </ChatForm>
+      </ChatContainer>
     </GridContainer>
   );
 };

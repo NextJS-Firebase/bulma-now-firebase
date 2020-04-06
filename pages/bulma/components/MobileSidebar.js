@@ -125,7 +125,9 @@ const MobileSidebar = ({ open, handleMenuClick }) => {
         </MobileSidebarMenuItem>
         <MobileSidebarMenuItem>
           {/* <CarIcon size={30} /> */}
-          <MobileSidebarMenuItemLabel>Deliveries</MobileSidebarMenuItemLabel>
+          <MobileSidebarMenuItemLabel>
+            Deliveries Mobile
+          </MobileSidebarMenuItemLabel>
         </MobileSidebarMenuItem>
         <MobileMenuSignOut>Sign Out</MobileMenuSignOut>
       </MobileSidebarMenu>

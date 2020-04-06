@@ -23,6 +23,9 @@ const SidebarContainer = styled.div`
     transform: translateX(-235px);
     transition: transform 250ms ease-in-out;
   }
+  @media only screen and (max-width: 700px) {
+    display: none;
+  }
 `;
 const SidebarMenu = styled.ul`
   display: flex;
