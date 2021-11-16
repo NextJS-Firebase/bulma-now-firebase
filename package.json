@@ -9,7 +9,7 @@
     "@analytics/google-analytics": "0.2.0",
     "@zeit/next-sass": "0.2.1-canary.4",
     "analytics": "0.2.2",
-    "aws-sdk": "2.533.0",
+    "aws-sdk": "2.814.0",
     "bulma": "0.7.5",
     "dotenv-webpack": "^1.7.0",
     "firebase": "6.6.2",
